@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fantasyCritic
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.fantasycritic.games/games
@@ -21,12 +21,13 @@ function main() {
                 let picks = pickedGames.filter(game => !game.counterPick)
                 let counterPicks = pickedGames.filter(game => game.counterPick)
 
+                jQ(".annotation").remove()
                 counterPicks.forEach(game => {
-                    jQ('a:contains("' + game.gameName + '")').parent().prepend("(cp)")
+                    jQ('a:contains("' + game.gameName + '")').parent().prepend('<span class="annotation">(cp)</span>')
                 })
 
                 picks.forEach(game => {
-                    jQ('a:contains("' + game.gameName + '")').parent().prepend("(p)")
+                    jQ('a:contains("' + game.gameName + '")').parent().prepend('<span class="annotation">(p)</span>')
                 })
             }
 
